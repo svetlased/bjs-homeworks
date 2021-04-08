@@ -5,18 +5,12 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     contribution = Number(contribution);
     amount = Number(amount);
 
-    let lastDayYear = date.getFullYear();
-    let lastDayMonth = date.getMonth();
-
     let today = new Date();
-    let todayYear = today.getFullYear();
-    let todayMonth = today.getMonth();
-    
 
-    let monthPayment
+    let monthPayment = 0;
     let bodyCredit = amount - contribution;
-    let time = (todayYear - lastDayYear)*12 + (lastDayMonth - todayMonth);
-    monthPayment = bodyCredit * ((1/12 * percent) + (1/12 * percent)/(((1 + (1/12 * percent))**time) - 1));
+    let time = (today.getFullYear() - date.getFullYear())*12 + (date.getMonth() - today.getMonth());
+    monthPayment = bodyCredit * (((1/12) * percent) + ((1/12) * percent)/(((1 + ((1/12) * percent))**time) - 1)) / 100 ;
     let totalAmount = time * monthPayment;
 
     return totalAmount.toFixed(2);
@@ -27,6 +21,6 @@ function getGreeting(name) {
     if (!name) {
         name = "Аноним";
     } 
-    let greeting = `Привет, мир! Меня зовут ${name}`;
+    let greeting = `Привет, мир! Меня зовут ${name}.`;
     return greeting;
 }
