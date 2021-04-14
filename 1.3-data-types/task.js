@@ -1,20 +1,24 @@
 "use strict";
 function calculateTotalMortgage(percent, contribution, amount, date) {
     // код для задачи №1 писать здесь
-    console.log(typeof percent, contribution, amount, date);
-    if (typeof percent !== 'number'){
-        return `Параметр percent содержит неправильное значение ${percent}`;
-    } else if (typeof contribution !== 'number'){
-        return `Параметр contribution содержит неправильное значение ${contribution}`;
-    } else if (typeof amount !== 'number'){
-        return `Параметр percent содержит неправильное значение ${percent}`;
-    }
-    // percent = Number(percent);
-    // contribution = Number(contribution);
-    // amount = Number(amount);
-    console.log(percent, contribution, amount, date)
-
     let today = new Date();
+    console.log({ percent, contribution, amount, date });
+    if (isNaN(percent) || percent <= 0 ){
+        console.log( `Параметр percent содержит неправильное значение ${percent}`);
+    } else if (isNaN(contribution) || contribution <= 0){
+        console.log(`Параметр contribution содержит неправильное значение ${contribution}`);
+    } else if (isNaN(amount) || amount <= 0 ) {
+        console.log(`Параметр percent содержит неправильное значение ${percent}`);
+    } else if (typeof percent !== 'number'){
+        percent = Number(percent);
+    } else if (typeof contribution !== 'number'){
+        contribution = Number(contribution);
+    } else if (typeof amount !== 'number'){
+        amount = Number(amount);
+    } else if ((date - today) <= 0) {
+        console.log(`Параметр date содержит неправильное значение ${date}`);
+    }
+
 
     let bodyCredit = amount - contribution;
     let indexP = percent / (12 * 100);
@@ -34,6 +38,5 @@ function getGreeting(name) {
     if (!name) {
         name = "Аноним";
     } 
-    let greeting = `Привет, мир! Меня зовут ${name}.`;
-    return greeting;
+    return `Привет, мир! Меня зовут ${name}.`
 }
