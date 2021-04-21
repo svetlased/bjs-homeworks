@@ -80,9 +80,7 @@ function getDecodedValue(secret) {
 
 function getPersonData(secretData) {
     let result1 = {};
-    for (let prop in secretData) {
-      result1.firstName = getDecodedValue(secretData[prop]);
-      result1.lastName = getDecodedValue(secretData[prop]);
-    }
+    result1.firstName = getDecodedValue(secretData.aaa);
+    result1.lastName = getDecodedValue(secretData.bbb);
     return result1;
 };
