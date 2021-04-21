@@ -1,6 +1,6 @@
 function isPalindrome() {
-    let result = this.split('').reverse().join('');
-    return result.toLowerCase() === this.toLowerCase();
+    let result = this.toLowerCase().replace(/ /g, '').split("");
+    return result.join("") === result.reverse().join("");
 }
 // или 
 // function isPalindrome() {
@@ -29,6 +29,6 @@ function checkBirthday(birthday) {
     const data = new Date(birthday.split('-'));
     const parsedBirthday = Date([Number(data[0]), Number((+data[1])-1), Number(+data[2])]);
     let diff = parsedBirthday - now;
-    let age = diff / (86400000 * 365,25);
+    let age = diff / (86400000 * 365.25);
     return age >= 18;
 }
