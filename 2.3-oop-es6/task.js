@@ -7,7 +7,7 @@ class PrintEditionItem {
         this.type = null;
     }
     fix(){
-        return this.state = state * 1,5;
+        return this.state*= 1.5;
     }
     set state(newState) {
         if (newState < 0) {
@@ -29,24 +29,25 @@ class Magazine extends PrintEditionItem {
     }
 }
 class Book extends PrintEditionItem {
-    constructor(name, releaseDate, pagesCount) {
+    constructor(author, name, releaseDate, pagesCount) {
         super(name, releaseDate, pagesCount);
+        this.author = author;
         this.type = "book";
     }
 }
-class NovelBook extends PrintEditionItem {
+class NovelBook extends Book {
     constructor(name, releaseDate, pagesCount) {
         super(name, releaseDate, pagesCount);
         this.type = "novel";
     }
 }
-class FantasticBook extends PrintEditionItem {
+class FantasticBook extends Book {
     constructor(name, releaseDate, pagesCount) {
         super(name, releaseDate, pagesCount);
         this.type = "fantastic";
     }
 }
-class DetectiveBook extends PrintEditionItem {
+class DetectiveBook extends Book {
     constructor(name, releaseDate, pagesCount) {
         super(name, releaseDate, pagesCount);
         this.type = "detective";
@@ -56,9 +57,30 @@ class DetectiveBook extends PrintEditionItem {
 // Задача 2 
 
 class Library {
-    name 
-    books 
     constructor(name) {
+        this.name = name;
         this.books = [];
     }
+    addBook(books) {
+        if (this.state > 30) {
+            this.push(books);
+        }
+    }
+    findBookBy(type, value){
+        if (this[type] === value) {
+            return this.name;
+        } else {
+            return null;
+        }
+    }
+    giveBookByName(bookName) {
+        if (this.name === bookName){
+            this.books.splice(indexOf(bookName), 1);
+        } else {
+            return null;
+        }
+    }
 }
+
+
+
