@@ -57,30 +57,42 @@ class DetectiveBook extends Book {
 // Задача 2 
 
 class Library {
-    constructor(name) {
+    constructor(name){
         this.name = name;
         this.books = [];
     }
     addBook(books) {
-        if (this.state > 30) {
-            this.push(books);
+        if (books.state > 30) {
+            this.books.push(books);
         }
     }
-    findBookBy(type, value){
-        if (this[type] === value) {
-            return this.name;
-        } else {
+    findBookBy(type, value) {
+        for (let i = 0; i < this.books.length; i++){
+            if (this.books[i][type] === value) {
+                return this.books[i];
+            } 
             return null;
         }
     }
     giveBookByName(bookName) {
-        if (this.name === bookName){
-            this.books.splice(indexOf(bookName), 1);
-        } else {
+        for (let i = 0; i < this.books.length; i++){
+            if (bookName === this.books[i].name) {
+                this.books.splice(i, 1);
+                return this.books[i];
+            }
             return null;
-        }
+        } 
     }
 }
+const myLibrary = new Library('Полка в гостиной');
+myLibrary.addBook(new DetectiveBook("Артур Конан Дойл", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008));
+myLibrary.addBook(new FantasticBook("Аркадий и Борис Стругацкие", "Пикник на обочине", 1972, 168));
+myLibrary.addBook(new NovelBook("Герберт Уэллс", "Машина времени", 1895, 138));
+myLibrary.addBook(new Magazine("Мурзилка", 1924, 60));
 
+console.log(myLibrary);
+console.log(myLibrary.findBookBy("releaseDate", 1924).name);
 
-
+console.log("Количество книг до выдачи: " + myLibrary.books.length); //Количество книг до выдачи: 4
+library.giveBookByName("Мурзилка");
+console.log("Количество книг после выдачи: " + myLibrary.books.length); //Количество книг после выдачи: 3
