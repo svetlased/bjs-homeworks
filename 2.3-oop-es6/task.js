@@ -76,23 +76,12 @@ class Library {
     }
     giveBookByName(bookName) {
         for (let i = 0; i < this.books.length; i++){
-            if (bookName === this.books[i].name) {
-                this.books.splice(i, 1);
-                return this.books[i];
+            if (this.books[i].name === bookName) {
+              const deletedBook = this.books[i];
+              this.books.splice(i, 1);
+              return deletedBook;
             }
-            return null;
-        } 
-    }
+        }
+        return null;
+    } 
 }
-const myLibrary = new Library('Полка в гостиной');
-myLibrary.addBook(new DetectiveBook("Артур Конан Дойл", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008));
-myLibrary.addBook(new FantasticBook("Аркадий и Борис Стругацкие", "Пикник на обочине", 1972, 168));
-myLibrary.addBook(new NovelBook("Герберт Уэллс", "Машина времени", 1895, 138));
-myLibrary.addBook(new Magazine("Мурзилка", 1924, 60));
-
-console.log(myLibrary);
-console.log(myLibrary.findBookBy("releaseDate", 1924).name);
-
-console.log("Количество книг до выдачи: " + myLibrary.books.length); //Количество книг до выдачи: 4
-library.giveBookByName("Мурзилка");
-console.log("Количество книг после выдачи: " + myLibrary.books.length); //Количество книг после выдачи: 3
