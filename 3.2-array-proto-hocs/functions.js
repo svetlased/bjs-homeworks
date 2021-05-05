@@ -13,19 +13,19 @@ function getReliableWeaponsNames(strength){
     return weapons.filter(weapon => weapon.durability > strength).map(weapon => weapon.name);
 }
 function getTotalDamage() {
-    return weapons.map(weapon => weapon.attack).reduce(function(a,b){
-        return a+b;
-    })
+    return weapons.reduce((a,b) => a + b.attack, 0)
 }
-function getValuestCountToSumValues(arr, sum) {
 
-    arr.reduce((acc, number, index) => {
-        if (number <= sum){
-          return index-1;
+function getValuestCountToSumValues(arr, sum) {
+  return arr.reduce((acc, num) => {
+      if (acc.sum < sum) {
+          acc.count++;
+          acc.sum+= num;
+          return acc;
+      } else {
+        return acc; 
         }
-        acc + number;
-      });
-}
+  }, { sum: 0, count: 0}).count}
 
 // вторая задача
 
@@ -41,30 +41,36 @@ function sum(...args) {
       return sum += +arg;
     }, 0);
   }
+// function compareArrays( arr1, arr2 ) {
+//     return JSON.stringify(arr1)==JSON.stringify(arr2); // !!every необходимо использовать не только перебираемый элемент, но и позицию перебираемого элемента
+// }
 function compareArrays( arr1, arr2 ) {
-    return JSON.stringify(arr1)==JSON.stringify(arr2);
+  return arr1.every((num, i) => num === arr2[i]) && arr1.length === arr2.length ;
 }
-function memorize(fn, limit) {
-  return function fn() {
+// function memorize(fn, limit) {
+//   return function fn() {
     
-  }
-}
+//   }
+// }
 
-function memorize(fn) {
-  let memory = [
-   {
-     args: [3, 4],
-     result: 7
-   },
-   {
-     args: [1, 3],
-     result: 4
-   }
- ]
-   return function(number1, number2){
-     console.log(fn(number1, number2)); //замыкание функции fn
-     return memory.find(obj => compareArrays(Array.from(arguments).join(', '), obj.args)).result;
-   }
- }
+function memorize(fn, limit) {
+  debugger; // добавить лимит
+  let memory = []
+  return function(...numbers){
+    console.log(fn(...numbers)); //замыкание функции fn
+    let search = memory.find(obj => compareArrays(numbers, obj.args));
+    if (search) {  //проверка, если есть нужный нам объект
+      return search.result; 
+    } 
+      memory.push({
+        args: numbers,
+        result: fn(...numbers)
+      });
+    if (memory.length > limit) {
+      memory.splice((limit-1), 1);
+    }
+    return fn(...numbers);
+}
+}
 
  
