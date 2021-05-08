@@ -73,15 +73,17 @@ function memorize(fn, limit) {
 }
 }
 //
+testCase(1,2,3);
+testCase(1,2);
+testCase(9,5,2,4);
 
 function testCase(testFunction, text){
 
 
-  let array1 = [ [1,2,3], [1,2], [1,2,3], [1,2], [9,5,2,4] ];
-  console.time("timeTaken");
+  let array = [ [1,2,3], [1,2], [1,2,3], [1,2], [9,5,2,4] ];
+  console.time(text);
   for (let i = 0; i < 100; i++) {
-    array1.forEach(testFunction, i, array[i]); //spread??
+    array.forEach((element) => testFunction(...element)); 
   }
-  console.timeEnd("timeTaken");
-  console.log(text)
+  console.timeEnd(text);
 }
