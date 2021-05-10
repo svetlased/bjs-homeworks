@@ -15,8 +15,8 @@ class AlarmClock {
                 time: time,
                 callback: callback,
                 id: id
-        })
-    }
+            })
+        }
     }
     removeClock(id){
         if (this.alarmCollection.some(alarm => alarm.id === id)) {
@@ -24,22 +24,22 @@ class AlarmClock {
             this.alarmCollection.splice(index, 1);
             return true;
         } else {
-            return false
+            return false;
         }
     }
     getCurrentFormattedTime() {
-        let now = new Date().toLocaleTimeString().slice(0,-3)
+        let now = new Date().toLocaleTimeString().slice(0,-3);
         return now;
     }
     start() {
         function checkClock(clock){
             if (clock.time === this.getCurrentFormattedTime()) {
-                return this.alarmCollection.callback;
+                return clock.callback();
             } 
         }
         if (this.timerId === null) {
                 this.timerId = setInterval(() => {
-                    this.alarmCollection.map(alarm => this.checkClock(alarm));
+                    this.alarmCollection.forEach(alarm => checkClock(alarm));
                     }, 1000)               
         }
     }
@@ -53,7 +53,7 @@ class AlarmClock {
         this.alarmCollection.forEach(alarm => console.log(alarm.id, alarm.time));
     }
     clearAlarms() {
-        stop();
+        this.stop();
         this.alarmCollection = [];
     }
 }
