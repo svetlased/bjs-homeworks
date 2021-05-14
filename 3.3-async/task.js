@@ -31,8 +31,14 @@ class AlarmClock {
         let now = new Date().toLocaleTimeString().slice(0,-3);
         return now;
     }
-    start() {
-        function checkClock(clock){
+    start(){
+        // let currentTime = this.getCurrentFormattedTime;
+        // function checkClock(clock) {
+        //     if (clock.time === currentTime()) {
+        //         return clock.callback();
+        //     } 
+        // }
+        let checkClock = (clock) => {
             if (clock.time === this.getCurrentFormattedTime()) {
                 return clock.callback();
             } 
